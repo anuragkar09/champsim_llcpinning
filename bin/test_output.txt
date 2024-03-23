@@ -1,0 +1,35 @@
+[DRAMSim3 Config] devices_per_rank 8 page_size 1024 megs_per_bank 64 megs_per_rank 16384 ranks 1 channel_size 16384 channels 4
+[BUILT FOR ART_RH]
+Block size in DRAMSim3: 64
+DRAMSim3_DRAM init -- fixed meta-RQ size
+VWQ_ENABLED
+RH_THRESHOLD 64
+
+*** ChampSim Multicore Out-of-Order Simulator ***
+
+Warmup Instructions: 1000000
+Simulation Instructions: 100000
+Number of CPUs: 8
+knob_cs_traces: n
+Off-chip DRAM Size: 64 GiB Channels: 4 Width: 32-bit Data Rate: 4800 MT/s
+
+VirtualMemory physical capacity: 68449988608 num_ppages: 16711423
+VirtualMemory page size: 4096 log2_page_size: 12
+
+All CPUs run trace-0
+CPU 0 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+CPU 1 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+CPU 2 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+CPU 3 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+CPU 4 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+CPU 5 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+CPU 6 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+CPU 7 runs ../../experiments/traces/602.gcc_s-1850B.champsimtrace.xz
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
+Basic BTB sets: 1024 ways: 8 indirect buffer size: 4096 RAS size: 64
