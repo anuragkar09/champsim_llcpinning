@@ -1,41 +1,41 @@
 enum class repl_t
 {
     rreplacementDlru,
-    rreplacementDsrrip
+    rreplacementDship_pinned
 };
 
-void repl_rreplacementDsrrip_initialize();
 void repl_rreplacementDlru_initialize();
+void repl_rreplacementDship_pinned_initialize();
 void impl_replacement_initialize()
 {
-    if (repl_type == repl_t::rreplacementDsrrip) return repl_rreplacementDsrrip_initialize();
     if (repl_type == repl_t::rreplacementDlru) return repl_rreplacementDlru_initialize();
+    if (repl_type == repl_t::rreplacementDship_pinned) return repl_rreplacementDship_pinned_initialize();
     throw std::invalid_argument("Replacement policy module not found");
 }
 
-uint32_t repl_rreplacementDsrrip_victim(uint32_t, uint64_t, uint32_t, const BLOCK*, uint64_t, uint64_t, uint32_t);
+uint32_t repl_rreplacementDship_pinned_victim(uint32_t, uint64_t, uint32_t, const BLOCK*, uint64_t, uint64_t, uint32_t);
 uint32_t repl_rreplacementDlru_victim(uint32_t, uint64_t, uint32_t, const BLOCK*, uint64_t, uint64_t, uint32_t);
 uint32_t impl_replacement_find_victim(uint32_t cpu, uint64_t instr_id, uint32_t set, const BLOCK* current_set, uint64_t ip, uint64_t full_addr, uint32_t type)
 {
-    if (repl_type == repl_t::rreplacementDsrrip) return repl_rreplacementDsrrip_victim(cpu, instr_id, set, current_set, ip, full_addr, type);
+    if (repl_type == repl_t::rreplacementDship_pinned) return repl_rreplacementDship_pinned_victim(cpu, instr_id, set, current_set, ip, full_addr, type);
     if (repl_type == repl_t::rreplacementDlru) return repl_rreplacementDlru_victim(cpu, instr_id, set, current_set, ip, full_addr, type);
     throw std::invalid_argument("Replacement policy module not found");
 }
 
+void repl_rreplacementDship_pinned_update(uint32_t, uint32_t, uint32_t, uint64_t, uint64_t, uint64_t, uint32_t, uint8_t);
 void repl_rreplacementDlru_update(uint32_t, uint32_t, uint32_t, uint64_t, uint64_t, uint64_t, uint32_t, uint8_t);
-void repl_rreplacementDsrrip_update(uint32_t, uint32_t, uint32_t, uint64_t, uint64_t, uint64_t, uint32_t, uint8_t);
 void impl_replacement_update_state(uint32_t cpu, uint32_t set, uint32_t way, uint64_t full_addr, uint64_t ip, uint64_t victim_addr, uint32_t type, uint8_t hit)
 {
+    if (repl_type == repl_t::rreplacementDship_pinned) return repl_rreplacementDship_pinned_update(cpu, set, way, full_addr, ip, victim_addr, type, hit);
     if (repl_type == repl_t::rreplacementDlru) return repl_rreplacementDlru_update(cpu, set, way, full_addr, ip, victim_addr, type, hit);
-    if (repl_type == repl_t::rreplacementDsrrip) return repl_rreplacementDsrrip_update(cpu, set, way, full_addr, ip, victim_addr, type, hit);
     throw std::invalid_argument("Replacement policy module not found");
 }
 
-void repl_rreplacementDsrrip_final_stats();
+void repl_rreplacementDship_pinned_final_stats();
 void repl_rreplacementDlru_final_stats();
 void impl_replacement_final_stats()
 {
-    if (repl_type == repl_t::rreplacementDsrrip) return repl_rreplacementDsrrip_final_stats();
+    if (repl_type == repl_t::rreplacementDship_pinned) return repl_rreplacementDship_pinned_final_stats();
     if (repl_type == repl_t::rreplacementDlru) return repl_rreplacementDlru_final_stats();
     throw std::invalid_argument("Replacement policy module not found");
 }

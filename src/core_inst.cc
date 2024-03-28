@@ -17,7 +17,7 @@
 VirtualMemory vmem(68719476736, 1 << 12, 5, 22222222, 200);
 
 DRAMSim3_DRAM DRAM(1.6666666666666667, "/data/anurag/llc_pinning/anish/champsim/dramsim3_configs/DDR5_64GB_4ch_4800.ini", "./");
-CACHE LLC("LLC", 1.0, 6, 16384, 16, 256, 256, 256, 1024, 29, 1, 4, 4, LOG2_BLOCK_SIZE, 0, 0, 0, 5, &DRAM, CACHE::pref_t::pprefetcherDno, CACHE::repl_t::rreplacementDsrrip);
+CACHE LLC("LLC", 1.0, 6, 16384, 16, 256, 256, 256, 1024, 29, 1, 4, 4, LOG2_BLOCK_SIZE, 0, 0, 0, 5, &DRAM, CACHE::pref_t::pprefetcherDno, CACHE::repl_t::rreplacementDship_pinned);
 CACHE cpu0_L2C("cpu0_L2C", 1.0, 5, 1024, 8, 32, 32, 16, 64, 9, 1, 2, 2, LOG2_BLOCK_SIZE, 0, 0, 0, 5, &LLC, CACHE::pref_t::pprefetcherDno, CACHE::repl_t::rreplacementDlru);
 CACHE cpu1_L2C("cpu1_L2C", 1.0, 5, 1024, 8, 32, 32, 16, 64, 9, 1, 2, 2, LOG2_BLOCK_SIZE, 0, 0, 0, 5, &LLC, CACHE::pref_t::pprefetcherDno, CACHE::repl_t::rreplacementDlru);
 CACHE cpu2_L2C("cpu2_L2C", 1.0, 5, 1024, 8, 32, 32, 16, 64, 9, 1, 2, 2, LOG2_BLOCK_SIZE, 0, 0, 0, 5, &LLC, CACHE::pref_t::pprefetcherDno, CACHE::repl_t::rreplacementDlru);
