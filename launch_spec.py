@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import shutil
+from multiprocessing import Pool
 
 test_base_dir = "/trace2/ChampSim/dpc3"
        
@@ -43,6 +44,11 @@ def launch_test(name, warmup, cycles, output_dir, binary):
     command.append("--simulation_instructions "+str(cycles))
     command.append("-traces "+test_base_dir+"/"+name)
     
+    # added to simulate multi cores 
+    print("Core count: " , int(cores))
+    for i in range(cores):
+        command.append(test_base_dir+"/"+name)
+    
     command.append("&")
     print(" ".join(command))
     os.system(" ".join(command))
@@ -55,6 +61,13 @@ if __name__ == "__main__":
     binary = os.path.abspath(binary)
     warmup = int(sys.argv[3])
     cycles = int(sys.argv[4])
-    for test in tests:
-        launch_test(test, warmup, cycles, output_dir, binary)
-        print("Test Launch complete: " + test)
+    cores = int(sys.argv[5])
+    
+    total_cores = os.cpu_count()
+    cores_to_use = max(1, total_cores // 2)
+
+    # Prepare the arguments for each test
+    args = [(test, warmup, cycles, output_dir, binary, cores) for test in tests]
+    # Use a process pool to manage concurrent test execution
+    with Pool(processes=cores_to_use) as pool:
+        pool.map(launch_test, args)
