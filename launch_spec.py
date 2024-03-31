@@ -24,7 +24,9 @@ tests = ["602.gcc_s-1850B.champsimtrace.xz", "603.bwaves_s-2931B.champsimtrace.x
          "620.omnetpp_s-141B.champsimtrace.xz", "621.wrf_s-6673B.champsimtrace.xz", "623.xalancbmk_s-592B.champsimtrace.xz", "628.pop2_s-17B.champsimtrace.xz",
           "649.fotonik3d_s-10881B.champsimtrace.xz", "654.roms_s-1007B.champsimtrace.xz" ]
 
-def launch_test(name, warmup, cycles, output_dir, binary):
+def launch_test(args):
+    name, warmup, cycles, output_dir, binary  = args
+
     print("Launching test: " + name)
     print("Warmup: " + str(warmup))
     print("Cycles: " + str(cycles))
@@ -45,9 +47,9 @@ def launch_test(name, warmup, cycles, output_dir, binary):
     command.append("-traces "+test_base_dir+"/"+name)
     
     # added to simulate multi cores 
-    print("Core count: " , int(cores))
-    for i in range(cores):
-        command.append(test_base_dir+"/"+name)
+   # print("Core count: " , int(cores))
+    #for i in range(cores):
+        #command.append(test_base_dir+"/"+name)
     
     command.append("&")
     print(" ".join(command))
@@ -61,13 +63,16 @@ if __name__ == "__main__":
     binary = os.path.abspath(binary)
     warmup = int(sys.argv[3])
     cycles = int(sys.argv[4])
-    cores = int(sys.argv[5])
+    #cores = int(sys.argv[5])
     
     total_cores = os.cpu_count()
     cores_to_use = max(1, total_cores // 2)
 
     # Prepare the arguments for each test
-    args = [(test, warmup, cycles, output_dir, binary, cores) for test in tests]
+    args = [(test, warmup, cycles, output_dir, binary) for test in tests]
+    
+    print(args)
+
     # Use a process pool to manage concurrent test execution
     with Pool(processes=cores_to_use) as pool:
         pool.map(launch_test, args)
