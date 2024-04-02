@@ -52,6 +52,7 @@ public:
 
   uint64_t *CRA_ctr = NULL;
   uint64_t *CRA_ctr_set = NULL;
+  uint64_t Num_Hot_Rows = 0; //++anurag
   uint64_t *per_set_tracker_state = NULL;
   bool     *isUniqRow = NULL;
   std::unordered_set<uint64_t> *cachedCtrs;

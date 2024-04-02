@@ -29,26 +29,31 @@ uint32_t CACHE::find_victim(uint32_t cpu, uint64_t instr_id, uint32_t set, const
                         + ra * (DRAM_CHANNELS * DRAM_BANKS)
                         + ba * (DRAM_CHANNELS)
                         + ch;
-    if (CRA_ctr[CRA_idx] >= RH_THRESHOLD/2){  
+    if (CRA_ctr[CRA_idx] >= RH_THRESHOLD/4){  
       it->lru = 0;
     }
   }
 
   auto victim = std::find_if(begin, end, [](BLOCK x) { return x.lru == maxRRPV; }); // hijack the lru field
   while (victim == end) {
+
     for (auto it = begin; it != end; ++it){
       it->lru++;
-      ro = dram_get_row(it->address);
-      ba = dram_get_bank(it->address);
-      ra = dram_get_rank(it->address);
-      ch = dram_get_channel(it->address);
 
-      CRA_idx = ro * (DRAM_CHANNELS * DRAM_BANKS * DRAM_RANKS)
-                        + ra * (DRAM_CHANNELS * DRAM_BANKS)
-                        + ba * (DRAM_CHANNELS)
-                        + ch;
-      if(CRA_ctr[CRA_idx] == RH_THRESHOLD){
-        it->lru = 0;
+      if(Num_Hot_Rows>0)
+      {
+        ro = dram_get_row(it->address);
+        ba = dram_get_bank(it->address);
+        ra = dram_get_rank(it->address);
+        ch = dram_get_channel(it->address);
+
+        CRA_idx = ro * (DRAM_CHANNELS * DRAM_BANKS * DRAM_RANKS)
+                          + ra * (DRAM_CHANNELS * DRAM_BANKS)
+                          + ba * (DRAM_CHANNELS)
+                          + ch;
+        if(CRA_ctr[CRA_idx] >= RH_THRESHOLD/2){
+          it->lru = 0;
+        }
       }
     }
     victim = std::find_if(begin, end, [](BLOCK x) { return x.lru == maxRRPV; });

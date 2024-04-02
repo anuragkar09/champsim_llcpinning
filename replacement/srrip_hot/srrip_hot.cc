@@ -28,7 +28,7 @@ uint32_t CACHE::find_victim(uint32_t cpu, uint64_t instr_id, uint32_t set, const
                       + ra * (DRAM_CHANNELS * DRAM_BANKS)
                       + ba * (DRAM_CHANNELS)
                       + ch;
-    if (CRA_ctr[CRA_idx] >= RH_THRESHOLD/2){
+    if (CRA_ctr[CRA_idx] >= RH_THRESHOLD/4){
       it->lru = 0;
     }
   }

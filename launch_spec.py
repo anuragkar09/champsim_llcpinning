@@ -20,9 +20,9 @@ tests=["400.perlbench-50B.champsimtrace.xz",
         "471.omnetpp-188B.champsimtrace.xz","473.astar-359B.champsimtrace.xz","481.wrf-1281B.champsimtrace.xz","482.sphinx3-1522B.champsimtrace.xz","483.xalancbmk-736B.champsimtrace.xz"]
 '''
 
-tests = ["602.gcc_s-1850B.champsimtrace.xz", "603.bwaves_s-2931B.champsimtrace.xz", "605.mcf_s-994B.champsimtrace.xz", "607.cactuBSSN_s-2421B.champsimtrace.xz",
-         "620.omnetpp_s-141B.champsimtrace.xz", "621.wrf_s-6673B.champsimtrace.xz", "623.xalancbmk_s-592B.champsimtrace.xz", "628.pop2_s-17B.champsimtrace.xz",
-          "649.fotonik3d_s-10881B.champsimtrace.xz", "654.roms_s-1007B.champsimtrace.xz" ]
+tests = ["600.perlbench_s-210B.champsimtrace.xz", "602.gcc_s-1850B.champsimtrace.xz", "603.bwaves_s-2931B.champsimtrace.xz", "605.mcf_s-994B.champsimtrace.xz", "607.cactuBSSN_s-2421B.champsimtrace.xz", "619.lbm_s-2677B.champsimtrace.xz",
+         "620.omnetpp_s-141B.champsimtrace.xz", "621.wrf_s-6673B.champsimtrace.xz", "623.xalancbmk_s-592B.champsimtrace.xz", "625.x264_s-20B.champsimtrace.xz","627.cam4_s-490B.champsimtrace.xz", "628.pop2_s-17B.champsimtrace.xz",
+          "631.deepsjeng_s-928B.champsimtrace.xz", "638.imagick_s-824B.champsimtrace.xz", "641.leela_s-800B.champsimtrace.xz", "644.nab_s-7928B.champsimtrace.xz", "648.exchange2_s-1247B.champsimtrace.xz", "649.fotonik3d_s-10881B.champsimtrace.xz", "654.roms_s-1007B.champsimtrace.xz", "657.xz_s-3167B.champsimtrace.xz" ]
 
 def launch_test(args):
     name, warmup, cycles, output_dir, binary  = args

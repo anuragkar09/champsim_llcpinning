@@ -986,7 +986,13 @@ void CACHE::recvACTInfo() {
           }
         }
       }
+      //++anurag
       CRA_ctr[CRA_idx]++;
+      if (CRA_ctr[CRA_idx] >= RH_THRESHOLD/2)
+      {
+        Num_Hot_Rows++;
+      }
+
       if (CRA_ctr[CRA_idx] % (RH_THRESHOLD/2) == 0) { // Issue mitigation
         s_num_mits++;
         num_mits++;
@@ -1059,6 +1065,13 @@ void CACHE::recvACTInfo() {
         uniq_rows_ACT++;
       }
       CRA_ctr[CRA_idx]++;
+      //++anurag
+      if (CRA_ctr[CRA_idx] >= RH_THRESHOLD/2)
+      {
+        Num_Hot_Rows++;
+      }
+
+
       if (CRA_ctr[CRA_idx] % (RH_THRESHOLD/2) == 0) {
         s_num_mits++;
         num_mits++;
