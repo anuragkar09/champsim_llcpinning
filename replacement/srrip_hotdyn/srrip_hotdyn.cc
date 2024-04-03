@@ -22,13 +22,14 @@ uint32_t CACHE::find_victim(uint32_t cpu, uint64_t instr_id, uint32_t set, const
 
   if(current_cycle - s_last_mit_cycle >= 100000){
     s_num_mits_this_period = s_num_mits - s_num_mits_last_period_cum;
+    s_last_mit_cycle = current_cycle;
+
   }
   if(s_num_mits_this_period > s_num_mits_last_period){
     adjust_policy = true;
   }
   s_num_mits_last_period_cum += s_num_mits_this_period;
   s_num_mits_last_period = s_num_mits_this_period;
-  s_last_mit_cycle = current_cycle;
 
   for (auto it = begin; it != end; ++it){
     ro = dram_get_row(it->address);
