@@ -8,7 +8,7 @@ LDLIBS := -L/data/anurag/llc_pinning/anish/dramsim3 -ldramsim3
 
 .phony: all clean
 
-all: bin/8C_16WLLC_shiphot
+all: bin/8C_16WLLC_shiphotdyn
 
 clean: 
 	$(RM) inc/champsim_constants.h
@@ -19,8 +19,8 @@ clean:
 	 find . -name \*.d -delete
 	 $(RM) -r obj
 
-	 find replacement/ship_hot -name \*.o -delete
-	 find replacement/ship_hot -name \*.d -delete
+	 find replacement/ship_hotdyn -name \*.o -delete
+	 find replacement/ship_hotdyn -name \*.d -delete
 	 find prefetcher/no -name \*.o -delete
 	 find prefetcher/no -name \*.d -delete
 	 find replacement/lru -name \*.o -delete
@@ -32,13 +32,13 @@ clean:
 	 find btb/basic_btb -name \*.o -delete
 	 find btb/basic_btb -name \*.d -delete
 
-bin/8C_16WLLC_shiphot: $(patsubst %.cc,%.o,$(wildcard src/*.cc)) obj/repl_rreplacementDship_hot.a obj/pref_pprefetcherDno.a obj/repl_rreplacementDlru.a obj/pref_pprefetcherDno_instr.a obj/bpred_bbranchDhashed_perceptron.a obj/btb_bbtbDbasic_btb.a
+bin/8C_16WLLC_shiphotdyn: $(patsubst %.cc,%.o,$(wildcard src/*.cc)) obj/repl_rreplacementDship_hotdyn.a obj/pref_pprefetcherDno.a obj/repl_rreplacementDlru.a obj/pref_pprefetcherDno_instr.a obj/bpred_bbranchDhashed_perceptron.a obj/btb_bbtbDbasic_btb.a
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-replacement/ship_hot/%.o: CFLAGS += -Ireplacement/ship_hot
-replacement/ship_hot/%.o: CXXFLAGS += -Ireplacement/ship_hot
-replacement/ship_hot/%.o: CXXFLAGS +=  -Dinitialize_replacement=repl_rreplacementDship_hot_initialize -Dfind_victim=repl_rreplacementDship_hot_victim -Dupdate_replacement_state=repl_rreplacementDship_hot_update -Dreplacement_final_stats=repl_rreplacementDship_hot_final_stats
-obj/repl_rreplacementDship_hot.a: $(patsubst %.cc,%.o,$(wildcard replacement/ship_hot/*.cc)) $(patsubst %.c,%.o,$(wildcard replacement/ship_hot/*.c))
+replacement/ship_hotdyn/%.o: CFLAGS += -Ireplacement/ship_hotdyn
+replacement/ship_hotdyn/%.o: CXXFLAGS += -Ireplacement/ship_hotdyn
+replacement/ship_hotdyn/%.o: CXXFLAGS +=  -Dinitialize_replacement=repl_rreplacementDship_hotdyn_initialize -Dfind_victim=repl_rreplacementDship_hotdyn_victim -Dupdate_replacement_state=repl_rreplacementDship_hotdyn_update -Dreplacement_final_stats=repl_rreplacementDship_hotdyn_final_stats
+obj/repl_rreplacementDship_hotdyn.a: $(patsubst %.cc,%.o,$(wildcard replacement/ship_hotdyn/*.cc)) $(patsubst %.c,%.o,$(wildcard replacement/ship_hotdyn/*.c))
 	@mkdir -p $(dir $@)
 	ar -rcs $@ $^
 
@@ -78,7 +78,7 @@ obj/btb_bbtbDbasic_btb.a: $(patsubst %.cc,%.o,$(wildcard btb/basic_btb/*.cc)) $(
 	ar -rcs $@ $^
 
 -include $(wildcard src/*.d)
--include $(wildcard replacement/ship_hot/*.d)
+-include $(wildcard replacement/ship_hotdyn/*.d)
 -include $(wildcard prefetcher/no/*.d)
 -include $(wildcard replacement/lru/*.d)
 -include $(wildcard prefetcher/no_instr/*.d)

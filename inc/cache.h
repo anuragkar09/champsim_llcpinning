@@ -71,6 +71,11 @@ public:
   uint64_t s_uniq_rows_touched = 0;
   uint64_t s_num_ACT = 0;
   uint64_t s_num_mits = 0;
+  uint64_t s_num_mits_this_period = 0;
+  uint64_t s_num_mits_last_period = 0;
+  uint64_t s_num_mits_last_period_cum = 0;
+  uint64_t s_policy = 0;
+  uint64_t s_last_mit_cycle = 0;
   uint64_t s_mm_set_evicts = 0;
   uint64_t s_mm_set_misses = 0;
   uint64_t s_row_ACT[100] = {};
