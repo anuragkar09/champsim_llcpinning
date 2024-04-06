@@ -6,14 +6,14 @@
 #ifndef CHAMPSIM_CONSTANTS_H
 #define CHAMPSIM_CONSTANTS_H
 #include "util.h"
-#define BLOCK_SIZE 64ul
+#define BLOCK_SIZE 256ul
 #define LOG2_BLOCK_SIZE lg2(BLOCK_SIZE)
 #define PAGE_SIZE 4096ul
 #define LOG2_PAGE_SIZE lg2(PAGE_SIZE)
 #define STAT_PRINTING_PERIOD 10000000ul
-#define NUM_CPUS 8ul
-#define NUM_CACHES 49u
-#define NUM_OPERABLES 66u
+#define NUM_CPUS 1ul
+#define NUM_CACHES 7u
+#define NUM_OPERABLES 10u
 #define VWQ_ENABLE 1
 #define ART_ENABLE 0
 #define ART_1B 0

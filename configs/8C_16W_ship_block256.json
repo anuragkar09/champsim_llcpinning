@@ -1,5 +1,5 @@
 {
-    "executable_name": "bin/8C_16WLLC_srrip_block256",
+    "executable_name": "bin/8C_16WLLC_ship_block256",
     "block_size": 256,
     "page_size": 4096,
     "heartbeat_frequency": 10000000,
@@ -227,7 +227,7 @@
         "virtual_prefetch": false,
         "prefetch_activate": "LOAD,PREFETCH",
         "prefetcher": "no",
-        "replacement": "srrip"
+        "replacement": "ship"
     },
 
     "physical_memory": {
